@@ -10,10 +10,7 @@ from shillelagh.backends.apsw.db import connect
 
 github_token = os.environ["API_KEY_GITHUB_PROJECTBOARD_DASHBOARD"]
 github_user = os.environ["API_TOKEN_USERNAME"]
-response = requests.get(
-    "https://api.github.com/repos/hackforla/website/issues?state=all",
-    auth=("hackforla", github_token),
-)
+response = requests.get("https://api.github.com/repos/hackforla/website/issues?state=all", auth=("hackforla", github_token))
 issues = response.json()
 
 # Link format
@@ -26,11 +23,7 @@ print("Last page:", last)
 page = 2
 while page <= int(last):
     print(f"Fetching page: {page}/{last}")
-    response = requests.get(
-        "https://api.github.com/repos/hackforla/website/issues?state=all&page="
-        + str(page),
-        headers={"Authorization": "Bearer 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"},
-    )
+    response = requests.get("https://api.github.com/repos/hackforla/website/issues?state=all&page=" + str(page), headers={"Authorization": "Bearer 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"})
     issues.extend(response.json())
     page += 1
 print("Number of issues:", len(issues))
@@ -44,18 +37,18 @@ with open("issues.json", "w") as f:
 duckdb.read_json("issues.json")
 df = duckdb.sql(
     """
-        SELECT
-            CURRENT_DATE as "Date",
-            SUM(CASE WHEN labels LIKE '%role missing%' AND state = 'open' THEN 1 ELSE 0 END) as "Role, Open",
-            SUM(CASE WHEN labels LIKE '%role missing%' AND state = 'closed' THEN 1 ELSE 0 END) as "Role, Closed",
-            SUM(CASE WHEN labels LIKE '%Complexity: Missing%' AND state = 'open' THEN 1 ELSE 0 END) as "Complexity, Open",
-            SUM(CASE WHEN labels LIKE '%Complexity: Missing%' AND state = 'closed' THEN 1 ELSE 0 END) as "Complexity, Closed",
-            SUM(CASE WHEN labels LIKE '%size: missing%' AND state = 'open' THEN 1 ELSE 0 END) as "Size, Open",
-            SUM(CASE WHEN labels LIKE '%size: missing%' AND state = 'closed' THEN 1 ELSE 0 END) as "Size, Closed",
-            SUM(CASE WHEN labels LIKE '%Feature Missing%' AND state = 'open' THEN 1 ELSE 0 END) as "Feature, Open",
-            SUM(CASE WHEN labels LIKE '%Feature Missing%' AND state = 'closed' THEN 1 ELSE 0 END) as "Feature, Closed"
-        FROM 'issues.json'
-    """
+            SELECT
+                CURRENT_DATE as "Date",
+                SUM(CASE WHEN labels LIKE '%role missing%' AND state = 'open' THEN 1 ELSE 0 END) as "Role, Open",
+                SUM(CASE WHEN labels LIKE '%role missing%' AND state = 'closed' THEN 1 ELSE 0 END) as "Role, Closed",
+                SUM(CASE WHEN labels LIKE '%Complexity: Missing%' AND state = 'open' THEN 1 ELSE 0 END) as "Complexity, Open",
+                SUM(CASE WHEN labels LIKE '%Complexity: Missing%' AND state = 'closed' THEN 1 ELSE 0 END) as "Complexity, Closed",
+                SUM(CASE WHEN labels LIKE '%size: missing%' AND state = 'open' THEN 1 ELSE 0 END) as "Size, Open",
+                SUM(CASE WHEN labels LIKE '%size: missing%' AND state = 'closed' THEN 1 ELSE 0 END) as "Size, Closed",
+                SUM(CASE WHEN labels LIKE '%Feature Missing%' AND state = 'open' THEN 1 ELSE 0 END) as "Feature, Open",
+                SUM(CASE WHEN labels LIKE '%Feature Missing%' AND state = 'closed' THEN 1 ELSE 0 END) as "Feature, Closed"
+            FROM 'issues.json'
+        """
 ).df()
 print(df)
 
