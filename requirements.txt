@@ -6,10 +6,6 @@ gspread == 5.9.0
 IPython
 gspread-dataframe
 pydrive
-shillelagh
-shillelagh[gsheetsapi]
-requests-cache
-duckdb
 
 # pip install --upgrade google-auth
 # pip install --upgrade google-api-python-client
