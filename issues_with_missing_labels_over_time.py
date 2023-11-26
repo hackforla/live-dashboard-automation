@@ -8,7 +8,7 @@ import requests
 from shillelagh.backends.apsw.db import connect
 
 
-def get_issues(page = 1):
+def get_issues(page=1):
     github_token = os.environ["API_KEY_GITHUB_PROJECTBOARD_DASHBOARD"]
     github_user = os.environ["API_TOKEN_USERNAME"]
     response = requests.get(
@@ -23,6 +23,7 @@ def get_issues(page = 1):
     next_link = links[1].split(";")[0].replace("<", "").replace(">", "").strip()
     last = parse_qs(urlparse(next_link).query)["page"][0]
     return issues, last
+
 
 issues, last = get_issues()
 for page in range(2, int(last) + 1):
@@ -70,7 +71,7 @@ connection = connect(
 )
 
 SQL = """
-INSERT INTO "https://docs.google.com/spreadsheets/d/16yC91C_ZTJoAhG0qVWqpEZ9kREPraubcARfZi9bkFcY/edit#gid=0" 
+INSERT INTO "https://docs.google.com/spreadsheets/d/1aJ0yHkXYMWTtMz6eEeolTLmAQOBc2DyptmR5SAmUrjM/edit#gid=1516123154" 
 SELECT * FROM df;
 """
 connection.execute(SQL)
