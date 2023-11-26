@@ -1,7 +1,6 @@
 name: run issues_with_missing_labels_over_time.py
 
 on:
-  schedule:
   workflow_dispatch:
   push:
     branches:

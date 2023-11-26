@@ -2,11 +2,11 @@ name: run main.py
 
 on:
   schedule:
-    - cron: '5 0-23/3 * * *' # At minute 5 past every 3rd hour starting from 12:05AM
+    - cron: "5 0-23/3 * * *" # At minute 5 past every 3rd hour starting from 12:05AM
   workflow_dispatch:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10' # install the python version needed
+          python-version: "3.10" # install the python version needed
 
       - name: install python packages not in requirements.txt
         run: |
@@ -28,7 +28,7 @@ jobs:
           pip install --upgrade google-auth-httplib2
           pip install --upgrade google-auth-oauthlib
           pip install chardet
-      
+
       - name: caching Python requirements in requirements.txt
         id: cache-python
         uses: actions/cache@v3
@@ -47,7 +47,7 @@ jobs:
 
       - name: ls show env.pythonLocation
         run: ls -R ${{ env.pythonLocation}}
- 
+
       - name: show module
         run: pip show pandas
 
@@ -57,10 +57,3 @@ jobs:
           BASE64_PROJECT_BOARD_GOOGLECREDENTIAL: ${{ secrets.BASE64_PROJECT_BOARD_GOOGLECREDENTIAL }}
           API_TOKEN_USERNAME: ${{ secrets.API_TOKEN_USERNAME }}
         run: python Project_Board_Dashboard_Script.py
-      
-      - name: setup environment and run issues_with_missing_labels_over_time.py
-        env:
-          API_KEY_GITHUB_PROJECTBOARD_DASHBOARD: ${{ secrets.API_KEY_GITHUB_PROJECTBOARD_DASHBOARD }}
-          BASE64_PROJECT_BOARD_GOOGLECREDENTIAL: ${{ secrets.BASE64_PROJECT_BOARD_GOOGLECREDENTIAL }}
-          API_TOKEN_USERNAME: ${{ secrets.API_TOKEN_USERNAME }}
-        run: python issues_with_missing_labels_over_time.py
