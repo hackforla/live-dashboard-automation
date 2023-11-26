@@ -1,0 +1,43 @@
+name: run issues_with_missing_labels_over_time.py
+
+on:
+  schedule:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v3 # checkout the repository content
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' # install the python version needed
+      
+      - name: caching Python requirements in requirements.txt
+        id: cache-python
+        uses: actions/cache@v3
+        with:
+          # pip cache files are stored in `~/.cache/pip`
+          path: ${{ env.pythonLocation}}/lib/python3.10/site-packages/*
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+
+      - if: ${{ steps.cache-python.outputs.cache-hit != 'true' }}
+        name: Install Dependencies
+        # continue-on-error: true
+        run: pip install -r requirements.txt
+      
+      - name: setup environment and run issues_with_missing_labels_over_time.py
+        env:
+          API_KEY_GITHUB_PROJECTBOARD_DASHBOARD: ${{ secrets.API_KEY_GITHUB_PROJECTBOARD_DASHBOARD }}
+          BASE64_PROJECT_BOARD_GOOGLECREDENTIAL: ${{ secrets.BASE64_PROJECT_BOARD_GOOGLECREDENTIAL }}
+          API_TOKEN_USERNAME: ${{ secrets.API_TOKEN_USERNAME }}
+        run: python issues_with_missing_labels_over_time.py
