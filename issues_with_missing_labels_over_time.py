@@ -53,6 +53,7 @@ df = duckdb.sql(
         FROM 'issues.json'
     """
 ).df()
+df["Date"] = df["Date"].dt.strftime("%m-%d-%Y")
 print(df)
 
 key_base64 = os.environ["BASE64_PROJECT_BOARD_GOOGLECREDENTIAL"]
