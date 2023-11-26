@@ -47,24 +47,19 @@ Currently, this repository supports the following issues:
 - [Issue 4921](https://github.com/hackforla/website/issues/4921)
 - [Issue 5810](https://github.com/hackforla/website/issues/5810) (Still looking for someone to work on)
 
-## Installation instructions
-
-N/A
-
-
-### Working with forks and branches
+# Working with forks and branches
 
 Follow Hack for LA's [Contributing.md guidelines/instructions](https://github.com/hackforla/website/blob/gh-pages/CONTRIBUTING.md#part-1-setting-up-the-development-environment).
 
 
-### Working with pull requests and reviews
+# Working with pull requests and reviews
 
 Currently, all data analysts working on issues that require making changes to this repository (add or edit files) have access to merge pull requests they have made. There are currently no pull request reviewers.
 
-### Testing
+## Testing
 
 N/A
 
-### Licensing
+# Licensing
 
 None as of yet.
