@@ -70,10 +70,11 @@ connection = connect(
     },
 )
 
-SQL = """
-INSERT INTO "https://docs.google.com/spreadsheets/d/1aJ0yHkXYMWTtMz6eEeolTLmAQOBc2DyptmR5SAmUrjM/edit#gid=1516123154" 
-SELECT * FROM df;
-"""
-connection.execute(SQL)
+connection.execute(
+    """
+        INSERT INTO "https://docs.google.com/spreadsheets/d/1aJ0yHkXYMWTtMz6eEeolTLmAQOBc2DyptmR5SAmUrjM/edit#gid=1516123154" 
+        SELECT * FROM df;
+    """
+)
 # kind of a hack to get the connection to close and prevent a segfault
 connection = connect(":memory:")
