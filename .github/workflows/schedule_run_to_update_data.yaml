@@ -51,7 +51,7 @@ jobs:
       - name: show module
         run: pip show pandas
 
-      - name: setup environment and run Project_Board_Dashboard_Script.py
+      - name: setup environment and run Project_Board_Dashboard_Script 2.py
         env:
           API_KEY_GITHUB_PROJECTBOARD_DASHBOARD: ${{ secrets.API_KEY_GITHUB_PROJECTBOARD_DASHBOARD }}
           BASE64_PROJECT_BOARD_GOOGLECREDENTIAL: ${{ secrets.BASE64_PROJECT_BOARD_GOOGLECREDENTIAL }}
