@@ -442,7 +442,7 @@ NIA_dataset2 = add_unknown_status_col(NIA_issues_df2, NIA_dataset2, r"(ready|dra
 NIA_dataset2 = add_unknownstatus_link(other_static_link_base, NIA_dataset2)
 
 # Prioritized Backlog
-dataset2 = add_known_status_col(final_pb2, "4 - Prioritized Backlog")
+pb_dataset2 = add_known_status_col(final_pb2, "4 - Prioritized Backlog")
 pb_dataset2 = add_unknown_status_col(pb_issues_df2, pb_dataset2, r"(ready|draft)")
 pb_dataset2 = add_unknownstatus_link(other_static_link_base, pb_dataset2)
 
