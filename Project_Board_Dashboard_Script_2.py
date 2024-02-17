@@ -270,7 +270,7 @@ scopes = ['https://www.googleapis.com/auth/spreadsheets',
 
 ## Read in offical GitHub labels from Google spreadsheet for weekly label check table
 
-key_base64 = = os.environ["BASE64_PROJECT_BOARD_GOOGLECREDENTIAL"]
+key_base64 = os.environ["BASE64_PROJECT_BOARD_GOOGLECREDENTIAL"]
 base64_bytes = key_base64.encode('ascii')
 key_base64_bytes = base64.b64decode(base64_bytes)
 key_content = key_base64_bytes.decode('ascii')

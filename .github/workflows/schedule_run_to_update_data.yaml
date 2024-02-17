@@ -56,4 +56,4 @@ jobs:
           API_KEY_GITHUB_PROJECTBOARD_DASHBOARD: ${{ secrets.API_KEY_GITHUB_PROJECTBOARD_DASHBOARD }}
           BASE64_PROJECT_BOARD_GOOGLECREDENTIAL: ${{ secrets.BASE64_PROJECT_BOARD_GOOGLECREDENTIAL }}
           API_TOKEN_USERNAME: ${{ secrets.API_TOKEN_USERNAME }}
-        run: python Project_Board_Dashboard_Script 2.py
+        run: python Project_Board_Dashboard_Script_2.py
