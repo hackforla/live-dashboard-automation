@@ -121,7 +121,7 @@ def cleaning(df_name):
             issues_df = pd.concat([issues_df, issue_data], ignore_index = True)
     
     # Get current time in LA
-    datetime_LA = datetime.now(pytz.timezone('US/Pacific') )
+    datetime_LA = datetime.now(pytz.timezone('US/Pacific'))
     
     # Format the time as a string and add it in Runtime column
     issues_df["Runtime"] = "LA time: " + datetime_LA.strftime("%m/%d/%Y %H:%M:%S")
